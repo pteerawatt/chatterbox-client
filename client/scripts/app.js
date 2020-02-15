@@ -9,7 +9,6 @@ var App = {
     FormView.initialize();
     RoomsView.initialize();
     MessagesView.initialize();
-   // $('.submit').on('click', App.post);
 
     // Fetch initial batch of messages
     App.startSpinner();
@@ -20,11 +19,18 @@ var App = {
     Parse.readAll((data) => {
       // examine the response from the server request:
       console.log(data);
+
       for (var i = 0; i < data.results.length; i++) {
+        var objectID = data.results[i].objectId;
         var username = data.results[i].username;
         var text = data.results[i].text;
-        MessagesView.render(username, text);
+
+        if (Messages.messageCollection.indexOf(objectID) === -1) {
+          Messages.messageCollection.push(objectID);
+          MessagesView.render(username, text);
+        }
       }
+
       callback();
     });
   },
@@ -41,7 +47,7 @@ var App = {
   },
 
   stopSpinner: function() {
-    App.$spinner.fadeOut('fast');
+    App.$spinner.fadeOut('slow');
     FormView.setStatus(false);
   }
 };

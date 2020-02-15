@@ -27,7 +27,9 @@
       <div class="spinner"><img src="client/images/spiffygif_46x46.gif"></div>
       <div id="rooms">
         Room:
-        <select></select>
+        <select class="Rooms">
+          <option value ="Lobby"> Lobby</option>
+        </select>
         <button>Add Room</button>
       </div>
       <form action="#" id="send" method="post">
@@ -48,6 +50,9 @@
     <script src="client/scripts/app.js"></script>
     <script>
       $(() => App.initialize());
+      setInterval(function () {
+        App.startSpinner()
+        App.fetch(App.stopSpinner);}, 5000)
     </script>
   </body>
 </html>
