@@ -6,15 +6,14 @@ var App = {
 
   initialize: function() {
     App.username = window.location.search.substr(10);
-
     FormView.initialize();
     RoomsView.initialize();
     MessagesView.initialize();
+   // $('.submit').on('click', App.post);
 
     // Fetch initial batch of messages
     App.startSpinner();
     App.fetch(App.stopSpinner);
-    $('.submit').on('click', App.post());
   },
 
   fetch: function(callback = ()=>{}) {
@@ -31,12 +30,8 @@ var App = {
   },
 
   post: function(message) {
-    var message = {
-      username: 'Pete',
-      text: 'stoasijgfos',
-      roomname: 'HR'
-    };
-    Parse.create((message));
+
+    Parse.create(message);
 
   },
 
